@@ -17,17 +17,18 @@ export class UserService {
         let user: User = new User();
         user.name = register.name;
         user.email = register.email;
+        // todo: unique email verification
         const hash = await bcrypt.hash(register.password, 10);
         user.password = hash;
         this.usersRepository.save(user);
         return user;
     }
 
-    async login(login: LoginDto): Promise<string|null> {
+    async login(login: LoginDto): Promise<User|null> {
         const email = login.email;
         let user = await this.usersRepository.findOneBy({email});
         if(user === null || !bcrypt.compare(login.password, user.password))
             return null;
-        return "jwt";
+        return user;
     }
 }

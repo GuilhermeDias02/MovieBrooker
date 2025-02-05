@@ -8,6 +8,10 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { User } from './user/user.entity';
+import { HttpModule } from '@nestjs/axios';
+import { MovieModule } from './movie/movie.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -19,10 +23,12 @@ import { ConfigModule } from '@nestjs/config';
             username: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,
             database: process.env.DATABASE_NAME,
-            entities: [],
+            // entities: [User],
             synchronize: true,
         }),
         UserModule,
+        MovieModule,
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
