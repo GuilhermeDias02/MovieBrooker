@@ -13,8 +13,6 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
-        private authService: AuthService,
-        private jwtService: JwtService,
     ) { }
 
     async register(register: RegisterDto): Promise<User> {
@@ -28,13 +26,13 @@ export class UserService {
         return user;
     }
 
-    async login(login: LoginDto): Promise<User | null> {
-        const user = this.authService.validateUser(login.email, login.password);
-        // todo: jwt
-        // const payload = { sub: user?.id, email: user?.email };
-        // access_token: await this.jwtService.signAsync(payload);
-        return user
-    }
+    // async login(login: LoginDto): Promise<User | null> {
+    //     const user = this.authService.validateUser(login.email, login.password);
+    //     // todo: jwt
+    //     // const payload = { sub: user?.id, email: user?.email };
+    //     // access_token: await this.jwtService.signAsync(payload);
+    //     return user
+    // }
 
     async getOneByEmail(userEmail: string): Promise<User|null>{
         return await this.usersRepository.findOneBy({ email: userEmail });
