@@ -15,7 +15,9 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({
+            envFilePath: '.env',
+        }),
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: process.env.DATABASE_HOST,
@@ -35,5 +37,5 @@ import { AuthModule } from './auth/auth.module';
 
 })
 export class AppModule {
-    constructor(private dataSource: DataSource) {}
+    constructor(private dataSource: DataSource) { }
 }

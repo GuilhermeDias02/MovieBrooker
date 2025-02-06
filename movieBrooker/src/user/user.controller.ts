@@ -7,7 +7,7 @@ import { User } from './user.entity';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('user')
-@ApiTags('users')
+@ApiTags('users', 'auth')
 export class UserController {
     constructor(private readonly userService: UserService) { };
 
@@ -26,6 +26,7 @@ export class UserController {
     })
     @Post("login")
     async postLogin(@Body() body: LoginDto): Promise<User | null> {
+
         return await this.userService.login(body);
         // todo: return jwt
     }

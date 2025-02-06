@@ -5,12 +5,16 @@ import { Repository } from 'typeorm';
 import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
+        private authService: AuthService,
+        private jwtService: JwtService,
     ) { }
 
     async register(register: RegisterDto): Promise<User> {
@@ -24,11 +28,15 @@ export class UserService {
         return user;
     }
 
-    async login(login: LoginDto): Promise<User|null> {
-        const email = login.email;
-        let user = await this.usersRepository.findOneBy({email});
-        if(user === null || !bcrypt.compare(login.password, user.password))
-            return null;
-        return user;
+    async login(login: LoginDto): Promise<User | null> {
+        const user = this.authService.validateUser(login.email, login.password);
+        // todo: jwt
+        // const payload = { sub: user?.id, email: user?.email };
+        // access_token: await this.jwtService.signAsync(payload);
+        return user
+    }
+
+    async getOneByEmail(userEmail: string): Promise<User|null>{
+        return await this.usersRepository.findOneBy({ email: userEmail });
     }
 }
