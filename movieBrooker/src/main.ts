@@ -17,7 +17,7 @@ async function bootstrap() {
         .setTitle('Movie Brooker api')
         .setDescription('movie brooker api')
         .setVersion('1.0')
-        .addTag('movies')
+        // .addTag('movieBrooker')
         .addBearerAuth()
         .build();
     const documentFactory = () => SwaggerModule.createDocument(app, config, {

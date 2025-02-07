@@ -9,7 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './user/user.entity';
-import { HttpModule } from '@nestjs/axios';
+// import { HttpModule } from '@nestjs/axios';
 import { MovieModule } from './movie/movie.module';
 import { AuthModule } from './auth/auth.module';
 
