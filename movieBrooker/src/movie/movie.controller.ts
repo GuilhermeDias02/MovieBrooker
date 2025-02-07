@@ -36,7 +36,7 @@ export class MovieController {
         summary: 'Get a movie',
         description: 'get movies based on its id !a finir!'
     })
-    @Get("movies")
+    @Get("movie")
     async GetMovie(@Query('id') id: number) {
         const movie = await this.movieService.GetMovie(id);
         return movie;
