@@ -14,6 +14,6 @@ export class RegisterDto extends ValidationPipe {
 
     @IsNotEmpty()
     @ApiProperty({example: "Abc3?65D"})
-    @Matches('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$')
+    // @Matches('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$')
     password: string;
 }
