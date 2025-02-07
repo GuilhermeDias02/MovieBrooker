@@ -18,6 +18,7 @@ async function bootstrap() {
         .setDescription('movie brooker api')
         .setVersion('1.0')
         .addTag('movies')
+        .addBearerAuth()
         .build();
     const documentFactory = () => SwaggerModule.createDocument(app, config, {
         include: [UserModule, AuthModule]

@@ -1,6 +1,6 @@
 import { ValidationPipe } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty, Matches } from "class-validator";
 
 export class RegisterDto extends ValidationPipe {
     @IsNotEmpty()
@@ -13,6 +13,7 @@ export class RegisterDto extends ValidationPipe {
     email: string;
 
     @IsNotEmpty()
-    @ApiProperty()
+    @ApiProperty({example: "Abc3?65D"})
+    @Matches('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$')
     password: string;
 }
