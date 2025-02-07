@@ -4,6 +4,7 @@ import { MovieService } from './movie.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('movie')
+@ApiTags('movies')
 export class MovieController {
     constructor(private readonly movieService: MovieService) { };
     // @ApiOperation({
@@ -20,8 +21,6 @@ export class MovieController {
         summary: 'Get movies',
         description: 'get movies based on the specified parameters'
     })
-    @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
     @Get("/movies")
     GetMovies(@Request() req, @Query('page') page: number = 1, @Query('search') search?: string, @Query('sort') sort?: string): any {
         const movies = this.movieService.GetMovies(page, search, sort);

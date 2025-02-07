@@ -13,13 +13,14 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
         HttpModule,
         UserModule,
         PassportModule,
-        ConfigModule.forRoot({
-            envFilePath: '.env',
-        }),
-        JwtModule.register({
-            secret: process.env.JWT_SECRET,
-            signOptions: { expiresIn: process.env.JWT_EXPIRESIN },
-        }),
+        // ConfigModule.forRoot({
+        //     isGlobal: true,
+        //     envFilePath: '.env',
+        // }),
+        // JwtModule.register({
+        //     secret: process.env.JWT_SECRET,
+        //     signOptions: { expiresIn: process.env.JWT_EXPIRESIN },
+        // }),
     ],
     providers: [MovieService],
     controllers: [MovieController],
