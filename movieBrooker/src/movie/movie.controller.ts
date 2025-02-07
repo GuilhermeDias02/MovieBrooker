@@ -1,6 +1,7 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Query, UseGuards, Request } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MovieService } from './movie.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('movie')
 export class MovieController {
@@ -19,9 +20,11 @@ export class MovieController {
         summary: 'Get movies',
         description: 'get movies based on the specified parameters'
     })
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
     @Get("/movies")
-    async GetMovies(@Query() page: number = 1, @Query() search: string = "", @Query() sort: string = ""): Promise<JSON> {
-        const movies = await this.movieService.GetMovies(page, search, sort);
+    GetMovies(@Request() req, @Query('page') page: number = 1, @Query('search') search?: string, @Query('sort') sort?: string): any {
+        const movies = this.movieService.GetMovies(page, search, sort);
         return movies;
     }
 }

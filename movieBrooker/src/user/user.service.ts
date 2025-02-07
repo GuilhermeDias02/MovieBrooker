@@ -19,7 +19,6 @@ export class UserService {
         let user: User = new User();
         user.name = register.name;
         user.email = register.email;
-        // todo: unique email verification
         const hash = await bcrypt.hash(register.password, 10);
         user.password = hash;
         this.usersRepository.save(user);
