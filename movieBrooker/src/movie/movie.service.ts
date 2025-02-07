@@ -29,34 +29,28 @@ export class MovieService {
 
     // }
 
-    async GetMovies(page: number = 1, search?: string, sort?: string){
-            const reqUrl = this.apiUrl + `/discover/movie?api_key=${this.apiKey}&page=` + page + (sort != undefined ? "&sort_by=" + sort : "") + (search != undefined ? "&query=" + encodeURIComponent(search) : "");
-            // console.log(sort);
-            // console.log(reqUrl);
-        // const result = this.httpService.get(
-        //     this.apiUrl + `3/discover/movie?api_key=${this.apiKey}&include_adult=true&include_video=false&language=en-US&page=` + page + (sort !== null ? "&sort_by=" + sort : "")
-             const result = this.httpService.get(reqUrl, {
-                headers: {
-                    'Accept': 'application/json'
-                }
-             }).pipe(
-                map(response=> response.data)
-             );
-        //     // {
-        //     //     headers: {
-        //     //         Authorization: `Bearer ${this.apiJwt}`,
-        //     //     },
-        //     // }
-        // );
-        // if(search !== null){
-        //     return this.filter(String(search), String(result));
-        // }
-        // const reqUrl = `${this.apiUrl}3/dicover/movie?api_key=${this.apiKey}&page=1`;
-        // const reqUrl = "https://api.themoviedb.org/3/discover/movie?api_key=119d4562ab9d082f729fff311f3c414a&language=en-US&page=1";
-        // console.log(reqUrl);
-        // let result = await fetch(reqUrl);
-        // console.log(result);
+    async GetMovies(page: number = 1, search?: string, sort?: string) {
+        const reqUrl = this.apiUrl + `/discover/movie?api_key=${this.apiKey}&page=` + page + (sort != undefined ? "&sort_by=" + sort : "") + (search != undefined ? "&with_keywords=" + encodeURIComponent(search) : "");
+        const result = this.httpService.get(reqUrl, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).pipe(
+            map(response => response.data)
+        );
         return result;
+    }
 
+    //chantier
+    GetMovie(movieId: number) {
+    //     const reqUrl = this.apiUrl + `/discover/movie?api_key=${this.apiKey}&id=${movieId}`
+    //     const result = this.httpService.get(reqUrl, {
+    //         headers: {
+    //             'Accept': 'application/json'
+    //         }
+    //     }).pipe(
+    //         map(response => response.data)
+    //     );
+    //     return result;
     }
 }

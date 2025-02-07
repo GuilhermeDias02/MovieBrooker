@@ -2,13 +2,19 @@ import { ValidationPipe } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty } from "class-validator";
 
-export class LoginDto extends ValidationPipe {
-    @IsEmail()
+export class ReservationDto extends ValidationPipe {
     @IsNotEmpty()
     @ApiProperty({example: "example@email.com"})
-    email: string;
+    idUser: number;
 
     @IsNotEmpty()
     @ApiProperty()
-    password: string;
+    idMovie: number;
+
+    @IsNotEmpty()
+    @ApiProperty()
+    sessionTime: Date;
+
+    @ApiProperty()
+    movieDuration: string = "2h";
 }

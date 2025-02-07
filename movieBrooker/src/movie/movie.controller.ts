@@ -32,6 +32,16 @@ export class MovieController {
         return movies;
     }
 
+    @ApiOperation({
+        summary: 'Get a movie',
+        description: 'get movies based on its id !a finir!'
+    })
+    @Get("movies")
+    async GetMovie(@Query('id') id: number) {
+        const movie = await this.movieService.GetMovie(id);
+        return movie;
+    }
+
     // @ApiOperation({
     //     summary: 'Get movies',
     //     description: 'get movies based on the specified parameters'

@@ -5,6 +5,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { MovieModule } from './movie/movie.module';
+import { ReservationModule } from './reservation/reservation.module';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -21,7 +23,7 @@ async function bootstrap() {
         .addBearerAuth()
         .build();
     const documentFactory = () => SwaggerModule.createDocument(app, config, {
-        include: [UserModule, AuthModule]
+        include: [UserModule, AuthModule, MovieModule, ReservationModule]
     });
     SwaggerModule.setup('api', app, documentFactory);
 

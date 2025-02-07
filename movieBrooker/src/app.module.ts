@@ -12,6 +12,8 @@ import { User } from './user/user.entity';
 // import { HttpModule } from '@nestjs/axios';
 import { MovieModule } from './movie/movie.module';
 import { AuthModule } from './auth/auth.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { Reservation } from './reservation/reservation.entity';
 
 @Module({
     imports: [
@@ -25,12 +27,13 @@ import { AuthModule } from './auth/auth.module';
             username: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,
             database: process.env.DATABASE_NAME,
-            entities: [User],
+            entities: [User, Reservation],
             synchronize: true,
         }),
         UserModule,
         MovieModule,
         AuthModule,
+        ReservationModule,
     ],
     controllers: [AppController],
     providers: [AppService],
